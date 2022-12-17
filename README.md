@@ -3,7 +3,7 @@
 
 ##### -=-=-=Days Completed=-=-=-
 - [x] Day 1 - Runtime: 0.5ms
-- [ ] Day 2
+- [x] Day 2 - Runtime: 1ms
 - [ ] Day 3
 - [ ] Day 4
 - [ ] Day 5
