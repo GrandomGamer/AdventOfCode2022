@@ -61,7 +61,7 @@ def getSolution():
     
     score = 0
 
-    with open('Puzzles\Day2\input.txt') as f:
+    with open('Solutions\Day2\input.txt') as f:
         
         #Each line in file is a round formatted as (Opponent You).
         try:

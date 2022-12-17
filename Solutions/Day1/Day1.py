@@ -25,7 +25,7 @@ def getSolution():
     Read ints from an input file to get a sum and compares it to the maxSums. 
     """
 
-    with open('Puzzles\Day1\input.txt') as f:
+    with open('Solutions\Day1\input.txt') as f:
         
         sum = 0
         maxTotal = 0
