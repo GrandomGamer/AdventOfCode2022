@@ -30,7 +30,7 @@ def getSolution():
     with open('Puzzles\Day1\input.txt') as f:
         
         sum = 0
-        max = 0
+        maxTotal = 0
 
         #Each blank line in file is next elf.
         try:
@@ -46,9 +46,9 @@ def getSolution():
 
         #TotaL our maxSums
         for maxSum in maxSums:
-            max += maxSum
+            maxTotal += maxSum
         
-        print(max)
+        print(maxTotal)
 
 
 
