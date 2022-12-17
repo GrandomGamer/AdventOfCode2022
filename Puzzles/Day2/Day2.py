@@ -1,10 +1,10 @@
 import time  
 
-#Option Pairs Key:[PlayType,Score]
-playerPairs = {
-    "X":["Rock",1],
-    "Y":["Paper",2],
-    "Z":["Scissors",3]
+#Option Pairs PlayType:Score
+playerPoints = {
+    "Rock":1,
+    "Paper":2,
+    "Scissors":3
 }
 
 #Opponent pairs as Key:PlayType
@@ -21,6 +21,12 @@ winningPair = {
     "Scissors":"Rock"
 }
 
+losingPair = {
+    "Paper":"Rock",
+    "Scissors":"Paper",
+    "Rock":"Scissors"
+}
+
 def getSolution():
 
     """
@@ -32,25 +38,31 @@ def getSolution():
     with open('Puzzles\Day2\input.txt') as f:
         
         #Each line in file is a round formatted as (Opponent You).
-        #try:
-        for line in f.readlines():
-            
-            formatLine = line.rstrip()
-            
-            opponent = opponentPairs[formatLine.split(" ")[0]]
-            you = playerPairs[formatLine.split(" ")[1]]
-            needWin = winningPair[opponent]
-            
-            if needWin == you[0]:
-                score = score + you[1] + 6
-            elif opponent == you[0]:
-                score = score + you[1] + 3
-            else:
-                score += you[1]      
+        try:
+            for line in f.readlines():
+                
+                formatLine = line.rstrip()
+                
+                opponent = opponentPairs[formatLine.split(" ")[0]]
+                roundEnd = formatLine.split(" ")[1]
+                
+                #Loss Handling
+                if roundEnd == "X":
+                    points = playerPoints[losingPair[opponent]]
+                    score = score + points
+                
+                #Draw Handling
+                elif roundEnd == "Y":
+                    score = score + playerPoints[opponent] + 3    
+                
+                #Win Handling    
+                elif roundEnd == "Z":
+                    points = playerPoints[winningPair[opponent]]
+                    score = score + points + 6      
                     
-        #except Exception as e:
-            #print('Please make sure file is formatted correctly. \nException: ', e)
-            #return
+        except Exception as e:
+            print('Please make sure file is formatted correctly. \nException: ', e)
+            return
 
         print("Score:",score)
 
