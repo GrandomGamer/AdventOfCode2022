@@ -68,14 +68,4 @@ def getSolution():
 
 
 
-
-
-
-
-
-
-
-#Timer setup and start solution
-start = time.time()
 getSolution()
-print("%.3gms" % ((time.time()-start)*1000))
