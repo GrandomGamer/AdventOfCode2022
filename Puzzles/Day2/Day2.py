@@ -27,6 +27,34 @@ losingPair = {
     "Rock":"Scissors"
 }
 
+
+def handleEnd(end:str,opponent:str):
+    
+    """
+    Handle the different types of endings for the game.
+
+    Args:
+        end (str): How the game should end.
+        opponent (str): What your opponent is playing.
+    """
+    
+    score = 0
+    
+    #Loss Handling
+    if end == "X":
+        points = playerPoints[losingPair[opponent]]
+        return points
+    
+    #Draw Handling
+    elif end == "Y":
+        return playerPoints[opponent] + 3    
+    
+    #Win Handling    
+    elif end == "Z":
+        points = playerPoints[winningPair[opponent]]
+        return points + 6      
+
+
 def getSolution():
 
     """
@@ -46,19 +74,8 @@ def getSolution():
                 opponent = opponentPairs[formatLine.split(" ")[0]]
                 roundEnd = formatLine.split(" ")[1]
                 
-                #Loss Handling
-                if roundEnd == "X":
-                    points = playerPoints[losingPair[opponent]]
-                    score = score + points
                 
-                #Draw Handling
-                elif roundEnd == "Y":
-                    score = score + playerPoints[opponent] + 3    
-                
-                #Win Handling    
-                elif roundEnd == "Z":
-                    points = playerPoints[winningPair[opponent]]
-                    score = score + points + 6      
+                score += handleEnd(roundEnd,opponent)
                     
         except Exception as e:
             print('Please make sure file is formatted correctly. \nException: ', e)
