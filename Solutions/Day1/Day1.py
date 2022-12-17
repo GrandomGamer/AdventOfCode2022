@@ -1,5 +1,3 @@
-import time
-
 #Set how many elves we want the maxes of.
 numMaxes = 3
 

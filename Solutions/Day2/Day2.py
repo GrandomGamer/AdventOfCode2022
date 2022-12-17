@@ -1,5 +1,3 @@
-import time  
-
 #Option Pairs PlayType:Score
 playerPoints = {
     "Rock":1,
