@@ -2,8 +2,8 @@
 ## Different puzzles and challenges from Advent of Code 2022
 
 ##### -=-=-=Days Completed=-=-=-
-- [x] Day 1 - Runtime: 0.5ms
-- [x] Day 2 - Runtime: 1ms
+- [x] Day 1
+- [x] Day 2
 - [ ] Day 3
 - [ ] Day 4
 - [ ] Day 5
