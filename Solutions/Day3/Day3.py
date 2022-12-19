@@ -1,27 +1,23 @@
 import math
 
-def getPairs(rucksack:str):
+def getPairs(rucksacks:list):
     """
-    Take in a rucksack and find any matching letters in each half (Compartment One and Compartment Two).
+    Take in a group of rucksacks and find any matching letters that are in all of the rucksacks.
 
     Args:
-        rucksack (str): Contents of rucksack
+        rucksacks (list): List of rucksacks.
     
     Returns:
         List: A list of letters (items) that are in both strings
     """
     items = []
     
-    compartOne = rucksack[:math.floor(len(rucksack)/2)]
-    compartTwo = rucksack[math.floor(len(rucksack)/2):]
-    
-    for item in compartOne:
+    for item in rucksacks[0]:
         
-        if item in compartTwo:
-            compartTwo = compartTwo.replace(item,'')
+        if all(item in ruck for ruck in rucksacks[1:]):
+            rucksacks[1:] = [ruck.replace(item, '') for ruck in rucksacks[1:]]
             items.append(item)
         
-    
     return items
 
 def getSolution():
@@ -31,30 +27,39 @@ def getSolution():
     """
     
     sum = 0
+    nextGroup = 0
+    rucksToCount = 3
+    
+    rucks = [""]*rucksToCount
 
     with open('Solutions\Day3\input.txt') as f:
         
-        #Each line in file is a round formatted as (Opponent You).
+        #Each line in file is a rucksack.
+        lines = f.readlines()
+        
         try:
-            for line in f.readlines():
-                
-                formatLine = line.rstrip()
-                
-                compartOne = formatLine[:math.floor(len(line)/2)]
-                compartTwo = formatLine[math.floor(len(line)/2):]
-                
-                letters = getPairs(formatLine)
-                
-                for l in letters:
+            #Get each group of 3 lines.
+            while nextGroup != len(lines):
                     
-                    #Get ASCII of letter and then subtract so that lowercases start at 1 and uppercases start at 27
-                    if l.isupper():
-                        priority = ord(l)-38
-                    else:
-                        priority = ord(l)-96
+                    #Set rucks list to the next group of 3 lines from input.
+                    for i in range(0,rucksToCount):
+                        rucks[i] = lines[nextGroup+i].rstrip()
+                    
+                    letters = getPairs(rucks)
+                    
+                    for l in letters:
+                        
+                        #Get ASCII of letter and then subtract so that lowercases start at 1 and uppercases start at 27
+                        if l.isupper():
+                            priority = ord(l)-38
+                        else:
+                            priority = ord(l)-96
 
-                    sum += priority
-                
+                        sum += priority
+
+                    nextGroup += rucksToCount
+                    print(nextGroup)
+                    
             print(sum)
                     
         except Exception as e:
